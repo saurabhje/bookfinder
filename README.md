@@ -1,12 +1,70 @@
-# React + Vite
+# BookFinder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+BookFinder is a **React-based application** that allows users to search for books using the [Open Library API](https://openlibrary.org/developers/api). It provides search by title, author, or subject, and displays results with details such as cover images, author names, and publication years.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Search books** by title, author, subject, or general query
+- **Paginated results** with total count displayed
+- **Clickable book cards** to view details
+- **Debounced search input** for better performance
+- **Responsive design** styled with Tailwind CSS
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+- **Frontend:** React, Context API (state management), Tailwind CSS
+- **API:** Open Library Search API
+- **Tooling:** Vite (or CRA, depending on your setup)
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone git@github.com:your-username/bookfinder.git
+cd bookfinder
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+---
+
+## Project Structure
+bookfinder/
+├── src/
+│   ├── components/   # UI components
+│   ├── context/      # Context API store
+│   ├── icons/        # Reusable icons
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── package.json
+├── tailwind.config.js
+├── postcss.config.js
+└── README.md
+
+---
+
+## Future Improvements
+
+- Add book detail modal with more metadata
+- Add favorites functionality with local storage
+- Improve error handling and loading states
