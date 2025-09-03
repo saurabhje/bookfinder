@@ -48,6 +48,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 ---
 
 ## Project Structure
+```
 bookfinder/
 ├── src/
 │   ├── components/   # UI components
@@ -60,7 +61,7 @@ bookfinder/
 ├── tailwind.config.js
 ├── postcss.config.js
 └── README.md
-
+```
 ---
 
 ## Future Improvements
