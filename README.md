@@ -3,6 +3,8 @@
 BookFinder is a **React-based application** that allows users to search for books using the [Open Library API](https://openlibrary.org/developers/api). It provides search by title, author, or subject, and displays results with details such as cover images, author names, and publication years.
 
 ---
+## Project logs and Dificult discussion with prompts links
+https://docs.google.com/document/d/1HnhizmDb2EAIyoZudQjSMjVRTGpN9lb44qdAZd4JQxY/edit?usp=sharing
 
 ## Features
 
