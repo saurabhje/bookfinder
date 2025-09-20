@@ -1,6 +1,13 @@
 import express from 'express';
 import User from '../models/userModel.js';
+import { configDotenv } from 'dotenv';
+import jasonwebtoken from 'jsonwebtoken';
+import protect from './authHelper.js';
+
+configDotenv();
+
 const auth = express.Router();
+const jwt = jasonwebtoken;
 
 auth.post('/login', async (req, res) => {
     try {
@@ -21,7 +28,15 @@ auth.post('/login', async (req, res) => {
                 message: 'Invalid password'
             });
         }
-        
+        const payload = { id: user._id };
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d'});
+        res.cookie("token", token, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'none',
+            secure: true
+        }
+        )
         res.status(200).json({
             success: true,
             message: 'Login successful'
@@ -58,8 +73,8 @@ auth.post('/signup', async (req, res) => {
     }
 });
 
-auth.get('/profile', (req, res) => {
-    res.send('Profile route'); // Added temporary response
+auth.get('/profile', protect, async(req, res) => {
+    res.status(200).json({success: true, user: req.user});
 });
 
 export default auth;

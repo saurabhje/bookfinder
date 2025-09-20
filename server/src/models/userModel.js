@@ -14,9 +14,11 @@ const userSchema = new Schema({
     },
     createdAt: {
     type: Date,
-    default: Date.now,
-  }
-});
+    default: Date.now, 
+  },
+  
+
+})
 
 import bcrypt from 'bcrypt';
 const SALT_WORK_FACTOR = 10;

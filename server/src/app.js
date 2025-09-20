@@ -2,15 +2,21 @@ import express from 'express';
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import cookieParser from "cookie-parser";
 
 import auth from './routes/auth.js';
 
 dotenv.config();
-
+const ALLOWED_ORIGINS = ['http://localhost:3000', 'https://bookfinder-psi.vercel.app'];
 const uri = process.env.MONGOURI;
 const app = express();
-app.use(cors());
+
+app.use(cookieParser());
 app.use(express.json());
+app.use(cors({
+  origin: ALLOWED_ORIGINS,
+  credentials: true
+}));
 
 mongoose.connect(uri)
   .then(() => console.log('MongoDB connected'))
