@@ -39,7 +39,8 @@ auth.post('/login', async (req, res) => {
         )
         res.status(200).json({
             success: true,
-            message: 'Login successful'
+            message: 'Login successful',
+            user: user
         });
     } catch (error) {
         res.status(500).json({
@@ -50,7 +51,7 @@ auth.post('/login', async (req, res) => {
 });
 
 auth.post('/signup', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, name, password } = req.body;
     try {
         const existingUser = await User.findOne({ username });
         if (existingUser) {
@@ -59,11 +60,12 @@ auth.post('/signup', async (req, res) => {
                 message: 'User already exists'
             });
         }
-        const newUser = new User({ username, password });
+        const newUser = new User({ username, name, password });
         await newUser.save();
         res.status(201).json({
             success: true,
-            message: 'User created'
+            message: 'User created',
+            user: newUser
         });
     } catch (err) {
         res.status(400).json({
