@@ -36,14 +36,14 @@ export default function SearchBar() {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder="Search for a book..."
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-shadow duration-200"
+              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-pink-600 transition-shadow duration-200"
             />
           </div>
           <div className="flex items-center gap-3">
             <select
               value={searchType}
               onChange={(e) => setSearchType(e.target.value)}
-              className="w-full sm:w-auto px-4 py-3 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full sm:w-auto px-4 py-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-1 focus:ring-pink-600 transition-shadow duration-200"
             >
               <option value="q">All</option>
               <option value="title">Title</option>
@@ -52,7 +52,7 @@ export default function SearchBar() {
             </select>
             <button
               type="submit"
-              className="w-full sm:w-auto bg-indigo-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-indigo-700"
+              className="w-full sm:w-auto bg-pink-600 text-white font-base py-2 px-5 rounded-md hover:bg-pink-700 transition-colors"
             >
               Search
             </button>

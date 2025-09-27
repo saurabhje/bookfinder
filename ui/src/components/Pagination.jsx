@@ -54,7 +54,7 @@ const Pagination = () => {
                 <button
                     key={page}
                     onClick={() => handlePageChange(page)}
-                    className={`px-4 py-2 border rounded-md ${currentPage === page ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
+                    className={`px-4 py-2 border rounded-md ${currentPage === page ? 'bg-pink-600 text-white border-pink-600' : 'bg-white border-gray-300 text-gray-700 hover:bg-gray-50'}`}
                 >
                     {page}
                 </button>

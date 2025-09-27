@@ -17,18 +17,20 @@ export default function Home() {
 
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
-      <header className="bg-white border-b border-gray-200 py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-3">
+      <header className="bg-white border-b border-gray-200 py-4 flex justify-between w-full">
+        <div className="px-4 sm:px-6 lg:px-8 flex items-center gap-3">
           <BookIcon />
           <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
             Book Finder
           </h1>
         </div>
-        <Link to={"/login"}>
-        <button className="p-2 rounded bg-gray-300"> 
-            Login
-        </button>
-        </Link>
+        <div className="pr-4 sm:px-6 lg:px-8">
+          <Link to={"/login"}>
+            <button className="bg-transparent border border-pink-600 text-pink-600 py-2 px-5 rounded-md hover:bg-pink-600 hover:text-white transition-colors duration-200">
+              Login
+            </button>
+          </Link>
+        </div>
       </header>
 
       <SearchBar />

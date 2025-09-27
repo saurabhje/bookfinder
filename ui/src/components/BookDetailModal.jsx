@@ -59,7 +59,7 @@ const BookDetailModal = () => {
                         href={`https://openlibrary.org${selectedBook.key}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-block mt-6 bg-indigo-600 text-white font-semibold py-2 px-5 rounded-lg hover:bg-indigo-700 transition-colors"
+                        className="inline-block mt-6 bg-pink-600 text-white font-base py-2 px-5 rounded-lg hover:bg-pink-700 transition-colors"
                     >
                         View on Open Library
                     </a>
