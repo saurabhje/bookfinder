@@ -15,10 +15,8 @@ export default function SignupForm() {
     const handleSubmit = async(e) => {
         e.preventDefault()
         try{
-            const res = await signUp({username, name, password})
-            if (res.ok){
-                navigate("/")
-            }
+            await signUp({username, name, password})
+            navigate("/");
         }catch(err){
             console.log('errr: ', err.message)
             setError(err.message)
