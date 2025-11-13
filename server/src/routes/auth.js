@@ -3,11 +3,13 @@ import User from '../models/userModel.js';
 import { configDotenv } from 'dotenv';
 import jasonwebtoken from 'jsonwebtoken';
 import protect from './authHelper.js';
+import {OAuth2Client } from 'google-auth-library';
 
 configDotenv();
 
 const auth = express.Router();
 const jwt = jasonwebtoken;
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 auth.post('/login', async (req, res) => {
     try {
@@ -74,6 +76,40 @@ auth.post('/signup', async (req, res) => {
         });
     }
 });
+auth.post('/glogin', async (req, res) => {
+    const {token} = req.body;
+    const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.G_CLIENT,
+        });
+    const payload = ticket.getPayload();
+    const { email, name } = payload;
+    const username = email.split("@")[0]
+    let user = await User.findOne({ username: username });
+    if (!user) {
+            user = new User({
+                username: username,
+                name: name || username,
+                password: Math.random().toString(36).slice(-8)
+            });
+            await user.save();
+        }
+    const jwtToken = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+            res.cookie("token", jwtToken, {
+            httpOnly: true,
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: 'none',
+            secure: true
+        });
+
+        res.status(200).json({
+            success: true,
+            message: 'Google login successful',
+            user
+        });
+
+})
+
 
 auth.get('/profile', protect, async(req, res) => {
     res.status(200).json({success: true, user: req.user});

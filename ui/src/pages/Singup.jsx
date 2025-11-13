@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useGoogleLogin } from "@react-oauth/google";
 
 export default function SignupForm() {
     const [password, setPassword] = useState("");
@@ -8,28 +9,48 @@ export default function SignupForm() {
     const [username, setUsername] = useState("");
     const [name, setName] = useState("");
     const [error, setError] = useState("");
-
+    const { googleLogin } = useAuth()
     const { signUp } = useAuth();
     const navigate = useNavigate();
 
-    const handleSubmit = async(e) => {
+    const handleGoogleSuccess = async (credentialResponse) => {
+        try {
+            const token = credentialResponse.credential;
+            const res = await googleLogin(token);
+            if (res.ok) {
+                navigate("/");
+            }
+        } catch (error) {
+            console.error("Google login error:", error.message);
+        }
+    };
+
+    const handleGoogleError = () => {
+        console.log("Google login failed");
+    };
+    const handleGlogin = useGoogleLogin({
+        onSuccess: handleGoogleSuccess,
+        onError: handleGoogleError,
+    });
+
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        try{
-            await signUp({username, name, password})
+        try {
+            await signUp({ username, name, password })
             navigate("/");
-        }catch(err){
+        } catch (err) {
             console.log('errr: ', err.message)
             setError(err.message)
         }
     }
     return (
-        <div className="flex flex-col w-full max-w-sm mx-auto mt-10 p-6 shadow-md rounded-md">
+        <div className="flex flex-col w-full max-w-sm md:max-w-md mx-auto mt-10 p-6 shadow-md rounded-md">
             <div className="flex justify-between">
                 <h1 className="font-medium">Sign Up</h1>
                 <Link to={"/login"} className="text-sm text-pink-600 hover:underline hover:decoration-pink-600 hover:underline-offset-4">Login</Link>
             </div>
             <p className="text-sm text-gray-500 w-2/3 mt-1">Enter your details below to create your account</p>
-            <form onSubmit={handleSubmit}  className="flex flex-col gap-4 mt-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-6">
                 <div className="flex flex-col gap-1">
                     <label htmlFor="name">Name</label>
                     <input
@@ -54,7 +75,7 @@ export default function SignupForm() {
                         {error && error.includes("User") ? error : ""}
                     </p>
                 </div>
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col md:flex-row gap-1">
                     <div className="flex flex-col">
                         <label htmlFor="password">Password</label>
                         <input
@@ -87,10 +108,11 @@ export default function SignupForm() {
             </form>
 
             <button
-                className="mt-3 px-4 py-2 border border-gray-300 rounded-md hover:bg-pink-100 transition"
-                onClick={() => window.location.href = "/api/auth/google"}
+                onClick={() => handleGlogin()}
+                className="w-full mt-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2 hover:bg-gray-100 transition"
             >
-                Continue with Google
+                <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5" />
+                <span className="text-gray-700">Sign in with Google</span>
             </button>
         </div>
     );
