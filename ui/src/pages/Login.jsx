@@ -8,25 +8,23 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
 
-    const handleGoogleSuccess = async (credentialResponse) => {
+    const handleGoogleSuccess = async (tokenResponse) => {
         try {
-            const token = credentialResponse.credential;
-            const res = await googleLogin(token);
-            if (res.ok) {
-                navigate("/");
-            }
+            const accessToken = tokenResponse.access_token;
+            const res = await googleLogin(accessToken);
+            if (res.ok) navigate("/");
         } catch (error) {
             console.error("Google login error:", error.message);
         }
     };
-    
-        const handleGoogleError = () => {
-            console.log("Google login failed");
-        };
-const handleGlogin = useGoogleLogin({
-  onSuccess: handleGoogleSuccess,
-  onError: handleGoogleError,
-});
+
+    const handleGoogleError = () => {
+        console.log("Google login failed");
+    };
+    const handleGlogin = useGoogleLogin({
+        onSuccess: handleGoogleSuccess,
+        onError: handleGoogleError,
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault()

@@ -13,17 +13,16 @@ export default function SignupForm() {
     const { signUp } = useAuth();
     const navigate = useNavigate();
 
-    const handleGoogleSuccess = async (credentialResponse) => {
+    const handleGoogleSuccess = async (tokenResponse) => {
         try {
-            const token = credentialResponse.credential;
-            const res = await googleLogin(token);
-            if (res.ok) {
-                navigate("/");
-            }
+            const accessToken = tokenResponse.access_token;
+            const res = await googleLogin(accessToken);
+            if (res.ok) navigate("/");
         } catch (error) {
             console.error("Google login error:", error.message);
         }
     };
+
 
     const handleGoogleError = () => {
         console.log("Google login failed");
@@ -76,7 +75,7 @@ export default function SignupForm() {
                     </p>
                 </div>
                 <div className="flex flex-col md:flex-row gap-1">
-                    <div className="flex flex-col">
+                    <div className="flex flex-col w-1/2">
                         <label htmlFor="password">Password</label>
                         <input
                             id="password"
@@ -86,7 +85,7 @@ export default function SignupForm() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div className="flex flex-col">
+                    <div className="flex flex-col w-1/2">
                         <label htmlFor="confirm_password">Confirm password</label>
                         <input
                             id="confirm_password"
@@ -112,7 +111,7 @@ export default function SignupForm() {
                 className="w-full mt-4 flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2 hover:bg-gray-100 transition"
             >
                 <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5" />
-                <span className="text-gray-700">Sign in with Google</span>
+                <span className="text-gray-700">Sign up with Google</span>
             </button>
         </div>
     );

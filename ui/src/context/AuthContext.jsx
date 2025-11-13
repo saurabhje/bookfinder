@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     }, [])
 
     const login = async (credentials) => {
-        try{
+        try {
             const res = await fetch("http://localhost:3001/auth/login", {
                 method: "POST",
                 credentials: "include",
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
             }
             setUser(data.user);
             return res
-        }catch(error){
+        } catch (error) {
             throw error
         }
     }
@@ -63,21 +63,21 @@ export const AuthProvider = ({ children }) => {
         }
     }
     const googleLogin = async (token) => {
-       try {
-         const res = await fetch("http://localhost:3001/auth/glogin", {
-           method: "POST",
-           credentials: "include",
-           headers: { "Content-Type": "application/json" },
-           body: JSON.stringify({ token }),
-         });
-         const data = await res.json();
-         if (!res.ok) throw new Error(data.message || "Google login failed");
-         setUser(data.user);
-         return res;
-       } catch (error) {
-         throw error;
-       }
-     };
+        try {
+            const res = await fetch("http://localhost:3001/auth/glogin", {
+                method: "POST",
+                credentials: "include",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ token }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.message || "Google login failed");
+            setUser(data.user);
+            return res;
+        } catch (error) {
+            throw error;
+        }
+    };
     return (
         <AuthContext.Provider value={{ user, login, signUp, isAuthenticated, googleLogin }}>
             {children}
