@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (credentials) => {
         try {
-            const res = await fetch("http://localhost:3001/auth/login", {
+            const res = await fetch(`${uri}/auth/login`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
     const signUp = async (credentials) => {
         try {
-            const res = await fetch("http://localhost:3001/auth/signup", {
+            const res = await fetch(`${uri}auth/signup`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     }
     const googleLogin = async (token) => {
         try {
-            const res = await fetch("http://localhost:3001/auth/glogin", {
+            const res = await fetch(`${uri}/auth/glogin`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },

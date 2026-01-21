@@ -6,15 +6,13 @@ import Profile from "./pages/profile";
 import { useAuth } from "./context/AuthContext";
 
 export default function App(){
-  const {user} = useAuth
+  const {user} = useAuth()
   return(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />}/>
       <Route path="/signup" element={<SignupForm />} />
-      {user && (
-        <Route path={`/user/${user.username}`} element={<Profile />} />
-      )}
+      <Route path="/user/:username" element={<Profile />} />
     </Routes>
   )
 }
