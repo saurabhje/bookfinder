@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
     const signUp = async (credentials) => {
         try {
-            const res = await fetch(`${uri}auth/signup`, {
+            const res = await fetch(`${uri}/auth/signup`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
