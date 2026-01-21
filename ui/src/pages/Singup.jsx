@@ -75,7 +75,7 @@ export default function SignupForm() {
                     </p>
                 </div>
                 <div className="flex flex-col md:flex-row gap-1">
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col md:w-1/2 w-full">
                         <label htmlFor="password">Password</label>
                         <input
                             id="password"
@@ -85,7 +85,7 @@ export default function SignupForm() {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    <div className="flex flex-col w-1/2">
+                    <div className="flex flex-col md:w-1/2 w-full">
                         <label htmlFor="confirm_password">Confirm password</label>
                         <input
                             id="confirm_password"

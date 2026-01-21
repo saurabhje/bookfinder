@@ -6,10 +6,10 @@ export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const isAuthenticated = !!user;
-
+    const uri = import.meta.env.VITE_URI;
     const fetchProfile = async () => {
         try {
-            const res = await fetch("http://localhost:3001/auth/profile", {
+            const res = await fetch(`${uri}/auth/profile`, {
                 credentials: "include"
             })
             if (res.ok) {
