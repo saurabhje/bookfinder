@@ -7,7 +7,7 @@ import cookieParser from "cookie-parser";
 import auth from './routes/auth.js';
 
 dotenv.config();
-const ALLOWED_ORIGINS = ['http://localhost:5173', 'https://bookfinder-psi.vercel.app'];
+const ALLOWED_ORIGINS = ['http://localhost:5173', 'https://bookfinder-zeta.vercel.app'];
 const uri = process.env.MONGOURI;
 const app = express();
 
